@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<!-- Bootstrap CSS Reference -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- jQuery Library -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Giftastic</title>
+  </head>
+
+
+  <!-- HTML PAGE LAYOUT / BootStrap -->
+
+  <body>
+
+    <!-- Creates Overall Grid --> 
+    <div class="container">
+
+    <!-- FIRST ROW: SEARCH TOOL SUMMARY AND DESCRIPTION --> 
+      <div class="row">
+
+        <div class="jumbotron">
+          <p><strong>Animal Giphy Search</strong> is a simple gif search tool.  Notice the buttons with various animals.  Click them to view new gifs.  And add your own with the search box.  Have fun!!
+          </p>
+        </div>
+      </div>
+
+
+    <!-- SECOND ROW: SEARCH BUTTONS --> 
+      <div class="row">
+
+        <!-- COLUMN 1 of 1: Contains row of search buttons, dynamically added -->
+        <div class="col-md-12" id="rowOfButtons">
+
+          <!-- This is the statement I want to added for each new button -->
+          <!-- <button type="button" class="btn btn-success">Test Button</button> -->
+        </div>
+
+      </div>
+      <br><br>
+
+    <!-- THIRD ROW: IMAGES AND SEARCH BOX--> 
+      <div class="row">
+
+        <!-- COLUMN 1 of 2: Contains image elements added when search button pressed -->
+        <div class="col-md-8" id="rowOfGifs">
+        </div>
+
+        <!-- COLUMN 2 of 2: Contains search box to add new search buttons; button id: "addToPets" -->
+        <div class="col-md-4">
+          <div class="input-group">
+                <input type="text" class="form-control" placeholder="Add a new search button...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" id="addToPets" type="button">Add</button>
+                </span>
+              </div>
+        </div>
+
+      </div>
+
+
+    </div> 
+
+
+<script src="./app.js"></script>
+    
+  </body>
+</html>
+
+
+
