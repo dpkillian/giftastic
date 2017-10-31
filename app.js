@@ -2,7 +2,10 @@
 // 
 
 
-var pets = ["dog", "cat", "turtle", "snake", "ferret", "goldfish", "monkey", "pig", "frog", "goat", "gerbil", "gecko", "horse", "hampster", "rabbit", "spider"];
+var pets = ["dog", "cat", "turtle"];
+// var pets = ["dog", "cat", "turtle", "snake", "ferret", "goldfish", "monkey", "pig", "frog", "goat", "gerbil", "gecko", "horse", "hampster", "rabbit", "spider"];
+
+
 
 // Giphy example request "ryan gosling", limit=5
 // "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5"
@@ -39,6 +42,7 @@ function renderButtons(){
         // event.preventDefault() prevents the form from trying to submit itself.
         // We're using a form so that the user can hit enter instead of clicking the button if they want
         event.preventDefault();
+        console.log($(".form-control").val().trim());
         // This line of code will grab the input from the textbox
         var pet = $(".form-control").val().trim();
 
@@ -61,7 +65,7 @@ function renderButtons(){
 
       var pet = $(this).attr("data-name");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        pet + "&api_key=MzS1nCKysUbxu85KTHa8WLYbeOvjiDAu&rating=g&limit=5";
+        pet + "&api_key=MzS1nCKysUbxu85KTHa8WLYbeOvjiDAu&rating=g&limit=10";
 
       $.ajax({
           url: queryURL,
