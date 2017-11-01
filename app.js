@@ -3,18 +3,9 @@
 
 
 var pets = ["dog", "cat", "turtle"];
+
+// Long pets array for testing
 // var pets = ["dog", "cat", "turtle", "snake", "ferret", "goldfish", "monkey", "pig", "frog", "goat", "gerbil", "gecko", "horse", "hampster", "rabbit", "spider"];
-
-
-
-// Giphy example request "ryan gosling", limit=5
-// "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5"
-// data.type (gif)
-// data.rating (g)
-// data.images.fixed_height.url
-// data.images.fixed_height_still.url
-
-
 
 
 
@@ -27,6 +18,7 @@ function renderButtons(){
 	for (var i = 0; i < pets.length; i++){
 		var temp = $("<button>");
 		temp.addClass("btn btn-success animal");
+		temp.attr("style", "margin: 5px 5px;");
 		temp.attr("data-name", pets[i]);
 		temp.text(pets[i]);
 		console.log(temp);
@@ -54,46 +46,91 @@ function renderButtons(){
 
       });
 
-// ON BUTTON PRESS [PETS], CAPTURE DATA AND QUERY GIPHY API AND DISPLAY RESULTS
+// ON BUTTON PRESS [PETS], CAPTURE DATA AND QUERY GIPHY API AND DISPLAY RESULTS VIA DISPLAYPETINFO
 // 
 
+// Adding click event listeners to all button elements with a class of "animal"
+    $(document).on("click", ".animal", displayPetInfo);
 
-	// Adding click event listeners to all elements with a class of "movie"
-    $(document).on("click", ".animal", displayMovieInfo);
-
-    function displayMovieInfo() {
+// DISPLAYPETINFO GRABS BUTTON NAME AND QUERIES GIPHY FOR 10 GIFS AND DYNAMICALLY CREATES NEW DIV & IMG
+    function displayPetInfo() {
 
       var pet = $(this).attr("data-name");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         pet + "&api_key=MzS1nCKysUbxu85KTHa8WLYbeOvjiDAu&rating=g&limit=10";
 
-      $.ajax({
+        // AJAX call to GIPHY to GET SPECIFIC PET LISTED IN BUTTON LABEL DATA-NAME
+        $.ajax({
           url: queryURL,
           method: "GET"
         })
         .done(function(response) {
           var results = response.data;
 
+          // Loop thru AJAX results (defined by limit=10)
           for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div class='item'>");
-
+ 			// Create variable for <div> with class "gif-div"
+            var gifDiv = $("<div class='gif-div'>");
+            // Create variable for Gif rating to be dislayed along with the gif
             var rating = results[i].rating;
 
+            // Creating <p> tag with rating info
             var p = $("<p>").text("Rating: " + rating);
 
+            // Creating <img> tag with custom labels to reference later
             var petImage = $("<img>");
-            petImage.attr("src", results[i].images.fixed_height.url);
+            petImage.attr("src", results[i].images.fixed_height_still.url);
+            petImage.attr("data-still", results[i].images.fixed_height_still.url);
+            petImage.attr("data-animate", results[i].images.fixed_height.url);
+            petImage.attr("data-state", "still");
+            petImage.attr("class", "gif");
 
+            // Prepend the gifDiv variable containing <div> tag with <p> and <img> tags
             gifDiv.prepend(p);
             gifDiv.prepend(petImage);
 
+            // Prepend entire (huge) div to rowOfGif handle
             $("#rowOfGifs").prepend(gifDiv);
           }
         });
     }
 
+// ON IMAGE PRESS <IMG>, FLIP DATA-STATE AND POINT <SRC> TO NEW URL (EITHER STILL OR ANIMATE)
+// 
+
+// Adding "document" click event listeners to all button elements with a class of "animal"
+
+    $(document).on("click", ".gif", flipAndLoad);
+
+    function flipAndLoad(){
+
+    	console.log("FLIPANDLOAD CONDITION!!!");
+
+        var state = $(this).attr("data-state");
+
+        if (state==="still") {
+
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+
+          // state = "animate";
+
+          } else {
+
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
 
 
+          // state = "still"
+
+          }
+
+    }
+
+
+
+
+// RENDER ALL BUTTONS IN PETS ARRAY ON FIRST PAGE LOAD
 renderButtons();
 
 
