@@ -2,7 +2,7 @@
 // 
 
 
-var pets = ["dog", "cat", "turtle"];
+var pets = ["dog", "cat", "turtle", "goldfish"];
 
 // Long pets array for testing
 // var pets = ["dog", "cat", "turtle", "snake", "ferret", "goldfish", "monkey", "pig", "frog", "goat", "gerbil", "gecko", "horse", "hampster", "rabbit", "spider"];
